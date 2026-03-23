@@ -103,27 +103,52 @@ I'll save this script as sample_script.R:
 
 ![](images/20.png)
 
-Now, the Git panel on the right says we have two untracked files: .gitignore and sample_script.R. That's because both these files have been created and saved in our demo_repo folder, and git detects their existence and is letting us know that neither is being tracked by git yet.
+Now, the Git panel on the right says we have two untracked files: .gitignore and sample_script.R. That's because both these files have been created and saved in our demo_repo folder, and git detects their existence and is letting us know that neither is being tracked by git yet. (This information is the same information we get if we type `git status` in the Terminal. We'll talk more about this and other commands at the end of this section.)
 
 ![](images/21.png)
 
-This information is the same information we get if we type `git status` in the Terminal:
-
-![](images/21_clgit.png)
-
-To track the files and , we'll add them by clicking the double-page-with-checkmark symbol, selecting the checkboxes for both files, entering
+To track the files and commit the changes we made, we'll click the double-page-with-checkmark symbol (circled in the first screenshot below), select the checkboxes for both files, enter a short message about what changes we've made that we're tracking, and click the "Commit" button (second screenshot below:
 
 ![](images/21_annotated.png)
 
 ![](images/22.png)
 
+That should give you a window like this, and you can hit "Close". If instead it tells you there was an error, then the commit didn't work and you need to do some troubleshooting.
+
 ![](images/23.png)
+
+That brings you back to this window, and before closing out of this window, we have one more step to do. So far, we tracked the changes we made on our local computer, but we haven't synced those changes with the remote repo on GitHub. To do that, we need to push the changes to GitHub by clicking "Push":
 
 ![](images/24.png)
 
+Which should bring up a window like this, which you can close after you check that it doesn't mention any errors.
+
 ![](images/25.png)
 
+To check that the changes pushed successfully to GitHub, toggle back to your browser to the page where your repo is and refresh the page. (If you closed that page in your brower, you can just reenter the URL to your repo, which will be `github.com/<your username>/<your repo name>`.) You should see some files there now, and they should match whatever you just committed and pushed.
+
 ![](images/26.png)
+
+Awesome! What we did using the R Studio graphical user interface (GUI, point-and-click) can equivalently be done entirely in the Terminal pane using the command line interface (CLI, typing text commands) via these four commands:
+
+```{git}
+#| eval: false
+
+git status
+git add --all
+git commit -m "Created a sample script"
+git push
+```
+
+Sometimes the commands work faster and with fewer errors in the command line, so they are handy to know.
+
+- For example, if I have made changes to a lot of files and I want to commit those changes, using the GUI (clicking boxes in the Git panel) requires me to click the box next to each file, whereas with the Terminal I can just type `git add --all`.
+- Additionally, the file size limit for a commit is higher for the GUI (point-and-click in the Git panel) than the CLI (typing commands in the Terminal), and it takes longer, so if I'm adding data or bigger files, I use the Terminal.
+
+Anatomy of a git command: Each git command has the format `git command`, where `command` is replaced by the name of the command (like `status` or `add`). Some commands like `add` and `commit` have optional or required arguments/inputs you can pass to them, which are called *flags* or *options*. To add these, you provide the name of the flag, and if it requires user input, you put that input after the flag. If you use the abbreviated name, it's a single dash, as in `git commit -m "Created a sample script"`, where `-m` stands for message and the part in quotes afterward is the commit message you would like git to use. If you use the full flag name, you use a double dash, as in `git add --all`, where the flag `--all` tells the `add` command to track all the changes that have been made.
+
+
+## Making a GitHub page for your project
 
 ![](images/27.png)
 
