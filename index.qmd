@@ -1,0 +1,131 @@
+---
+title: "Making your first GitHub repo (and GitHub page)"
+author: "Jess Kunke"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    theme: cosmo
+embed-resources: true
+---
+
+## Overview and prerequisites
+
+In this tutorial, I'll show you how to...
+
+- make a new GitHub repository (repo),
+- create a new R Studio project on your computer that is connected to the GitHub repo,
+- 
+
+## Making a new GitHub repo
+
+Go to github.com and log in. Click the + sign near the upper right of the window, and select "New Repository":
+
+![](images/03_annotated.png)
+
+Enter a name and (optionally) a description for your repository:
+
+![](images/05.png)
+
+Scroll down, leaving the rest of the settings as they are for now, and click the green "Create repository" button:
+
+![](images/06.png)
+
+Congratulations, you are now the proud owner of a new repository! Click the "copy" symbol button indicated below to copy the URL for cloning (making a copy of) your repository to your computer:
+
+![](images/07_annotated.png)
+
+For now, leave this page up in your browser (we'll return to it later), and we'll move to R Studio for the next few steps.
+
+
+
+## Creating and linking an RStudio Project to your repo
+
+Whether you open RStudio fresh now or you already have RStudio open to another project, either way is fine. In my screenshots below, you can see I already had an R Studio project open called STAT408_Spr26, and creating the new project did not disturb this project.
+
+In R Studio, navigate to the top menu and click File > New Project... as shown below, then select Version Control, then Git: 
+
+![](images/10.png)
+
+![](images/11.png)
+
+![](images/12.png)
+
+You should get a window titled "Clone Git Repository", as shown below. Paste the URL you copied from GitHub in the "Repository URL" box. Double-click the part of the URL that is your repo name (here, that's `demo_repo`) and do Control-C (Windows) or Command-C (Mac) to copy it; this will automatically paste it under "Project directory name", or else you can paste it yourself there. Click "Browse" to select the folder on your computer that you want to contain this repository; in my example below, the `demo_repo` folder will be a subfolder of my `Documents` folder. Finally, check the "Open in new session" box and click "Create Project".
+
+![](images/14.png)
+
+R Studio should open a fresh R Studio session, a new window with a new environment and a new instance of R running, and the title at the top of the window should be the name of your repo. Here, you can see my window is titled "demo_repo".
+
+![](images/15.png)
+If you click on the "Git" tab toward the upper right, you'll see that we have some untracked files:
+
+![](images/16.png)
+
+When we created the repo on GitHub, we just made an empty repo. When we made it into an R Studio project, R Studio added an R project file (demo_repo.Rproj) and a .gitignore file. What are these?
+
+- The R project file allows you to open your R project in the future and have the working directory automatically set to that folder. To do this, rather than opening R Studio from the application, you can just use Finder (Mac) or File Explorer (Windows) or whatever file navigator you have to navigate to your project folder on your computer, then double-click the demo_repo.Rproj file or whatever your R project file is called (its name will be the same as your R project and it will have the extension .Rproj). This will open your project in R Studio.
+- The .gitignore file allows you not to track certain files in your folder. Anything you list in this file, git will ignore, and it won't get stored on GitHub. Each file (or file pattern) you want not to track should be on a separate line.
+
+![](images/17.png)
+
+I'm going to add two more files to the .gitignore file. I only track the R project file in my repository if I think other users (including future me) will want to use it as an R project, so for this project I won't track it. Since I'm on a Mac, I also avoid tracking the .DS_Store file that Macs generate to track folder attributes. What files you add here will depend on your project, your computer, your intended audience/purposes, and your preferences. Notice that since I stopped tracking the R project file by adding it to .gitignore, the Git panel in the upper right of the R Studio window no longer lists it; it's ignoring that file.
+
+![](images/18.png)
+
+
+## The basic git cycle: status, add, commit, push
+
+Let's make some files now in this repo. Suppose I want to create an R script with some code, so I click the document-with-green-plus-sign symbol and select "R script" to open a blank R script (.R extension), then add some code. You can add whatever code you like here, or you can copy my code from the code chunk below the screenshot.
+
+![](images/19.png)
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+library(nycflights13)
+
+flights |> 
+  filter(dest == "IAH") |> 
+  mutate(speed = distance / air_time * 60) |> 
+  select(year:day, dep_time, carrier, flight, speed) |> 
+  arrange(desc(speed))
+
+fast_flights = flights |> 
+  filter(dest == "IAH") |> 
+  mutate(speed = distance / air_time * 60) |> 
+  select(year:day, dep_time, carrier, flight, speed) |> 
+  arrange(desc(speed))
+```
+
+I'll save this script as sample_script.R:
+
+![](images/20.png)
+
+Now, the Git panel on the right says we have two untracked files: .gitignore and sample_script.R. That's because both these files have been created and saved in our demo_repo folder, and git detects their existence and is letting us know that neither is being tracked by git yet.
+
+![](images/21.png)
+
+This information is the same information we get if we type `git status` in the Terminal:
+
+![](images/21_clgit.png)
+
+To track the files and , we'll add them by clicking the double-page-with-checkmark symbol, selecting the checkboxes for both files, entering
+
+![](images/21_annotated.png)
+
+![](images/22.png)
+
+![](images/23.png)
+
+![](images/24.png)
+
+![](images/25.png)
+
+![](images/26.png)
+
+![](images/27.png)
+
+
+
