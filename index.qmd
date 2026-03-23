@@ -39,9 +39,9 @@ For now, leave this page up in your browser (we'll return to it later), and we'l
 
 
 
-## Creating and linking an RStudio Project to your repo
+## Creating and linking an R Studio Project to your repo
 
-Whether you open RStudio fresh now or you already have RStudio open to another project, either way is fine. In my screenshots below, you can see I already had an R Studio project open called STAT408_Spr26, and creating the new project did not disturb this project.
+Whether you open R Studio fresh now or you already have R Studio open to another project, either way is fine. In my screenshots below, you can see I already had an R Studio project open called STAT408_Spr26, and creating the new project did not disturb this project.
 
 In R Studio, navigate to the top menu and click File > New Project... as shown below, then select Version Control, then Git: 
 
@@ -107,7 +107,7 @@ Now, the Git panel on the right says we have two untracked files: .gitignore and
 
 ![](images/21.png)
 
-To track the files and commit the changes we made, we'll click the double-page-with-checkmark symbol (circled in the first screenshot below), select the checkboxes for both files, enter a short message about what changes we've made that we're tracking, and click the "Commit" button (second screenshot below:
+To track the files and commit the changes we made, we'll first click the double-page-with-checkmark symbol (circled in the first screenshot below, and it will say "Commit" next to it if your panel is wide enough to show the name of the button). This will open up a new window (second screenshot below). Select the checkboxes for both files, enter a short message about what changes we've made that we're tracking, and click the "Commit" button on this smaller window:
 
 ![](images/21_annotated.png)
 
@@ -150,7 +150,123 @@ Anatomy of a git command: Each git command has the format `git command`, where `
 
 ## Making a GitHub page for your project
 
+For each public GitHub repo you make on your account, you can make an associated webpage for it. Let's try that with our current repo. Suppose that we want to make an online tutorial or demo for the code we wrote, sample_script.R.
+
+To start, we create a new Quarto document by clicking that same new document symbol in the upper left, selecting "Quarto Document...", and clicking "Create Empty Document":
+
 ![](images/27.png)
+
+![](images/28.png)
+
+That should give you something like this:
+
+![](images/29.png)
+
+Let's copy and paste the code from our script, change the title, and add a little text:
+
+![](images/30.png)
+
+When you save the file, you should notice that the Git panel reflects that there is a new untracked file:
+
+![](images/31.png)
+
+I'll show a slightly different way to track and commit this file from what I showed before. Rather than going straight to the Git panel Commit button (the double-document-with-checkmark symbol), I'll click the checkmark next to the new file first, then click the Git panel Commit button, add a commit message, and click "Commit":
+
+![](images/32.png)
+
+![](images/33.png)
+
+Once again, you can close the window, click "Push", then close the window again (just check for errors in both steps). Great, now let's go back to the browser and refresh the page for the repo, and you should see your code_demo.qmd file there:
+
+![](images/36.png)
+
+Now it's time to tell GitHub that we want to activate a webpage for this repo. Click the Settings button with the gear symbol on the right end of the top GitHub menu, then click Pages on the lefthand menu:
+
+![](images/37.png)
+
+Under Branch, click the dropdown menu that says None and choose main, then hit save. You should see this:
+
+![](images/39.png)
+
+GitHub is now processing your new page! Click Actions along the top GitHub menu and you'll see a brown dot next to the action it is running to get your page ready:
+
+![](images/40.png)
+
+This brown dot means the action is pending, meaning it's working on it.  When your page is ready, it will turn to a green checkmark like this:
+
+![](images/41.png)
+
+If you click "pages build and deployment", you'll see more details about the action, as well as a link to your page:
+
+![](images/42.png)
+
+Unfortunately when we click the link, we get an error message instead of a website:
+
+![](images/43.png)
+
+This is because the page that GitHub Pages will use for your project page has to be an HTML file called index.html, not a Quarto document called code_demo.qmd. So we need to (1) name our Quarto file index.qmd and (2) render it to get index.html before pushing. Let's do that in R Studio:
+
+![](images/44.png)
+
+![](images/45.png)
+
+When you do that, your Git panel should now show that you've "deleted" your old code_demo.qmd file and "created" an untracked file called "index.qmd"; this is what renaming a file looks like.
+
+![](images/46.png)
+
+Go ahead and commit these changes as you normally would. You'll notice that if you're using the GUI approach (clicking the checkboxes to add the files), it recognizes that all you did was rename a file, and the Git panel list of changes updates accordingly:
+
+![](images/47.png)
+
+I'll call my commit "Rename demo to index". After I commit and push, I toggle back to my browser and see that the renaming is reflected on GitHub too, and there's a brown "pending" dot next to the lastest commit, indicating it's updating my page:
+
+![](images/51.png)
+
+When my page is updated, that brown dot will turn into a green checkmark:
+
+![](images/52.png)
+
+But the page still won't work because we didn't render the Quarto file to an HTML file! So let's do that finally by clicking the Render button above my Quarto document in the R Studio Source panel:
+
+![](images/53.png)
+
+Notice that now there are multiple new files, not just the HTML file but also a whole folder called index_files. When you are rendering to HTML to put it on GitHub, I generally recommend using the option `embed-resources: true` so that all the information in index_files gets included in the HTML file itself. I demonstrate that here, and after rendering the Quarto file again, I see that the HTML file is the only new file (shown in the status column as two yellow question marks) and the Quarto file has been modified (shown in the status column as a blue "M").
+
+![](images/56.png)
+
+If you check the checkboxes to stage the changes for commit, you'll see that
+
+- the double question marks become a green "A" for "added" and is on the lefthand side of the Status column, and
+- the blue "M" stays a blue "M" but moves to the left.
+
+![](images/57.png)
+
+This reflects that both files have been staged for commit. Go ahead and finish your commit and push, then check your repo, and it should look like this:
+
+![](images/58.png)
+
+Once the brown dot turns to a green checkmark as before, go to your project page URL github, which will be `<your username>.github.io/<your repo name>`, and you'll see something like this:
+
+![](images/60.png)
+
+Hurray!
+
+One last step: we can make the project page URL easier to find from our repo page. Go back to your GitHub repo at `github.com/<your username>/<your repo name>`, and click the gear symbol next to "About":
+
+![](images/61_annotated.png)
+
+Check the box that says "Use your GitHub Pages website":
+
+![](images/62.png)
+
+Now your URL appears on your repo page in the About section!
+
+![](images/64.png)
+
+
+
+
+
 
 
 
