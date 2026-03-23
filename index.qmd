@@ -4,18 +4,29 @@ author: "Jess Kunke"
 format:
   html:
     toc: true
-    toc-depth: 2
+    toc-depth: 3
     theme: cosmo
 embed-resources: true
 ---
 
-## Overview and prerequisites
+## Overview
 
 In this tutorial, I'll show you how to...
 
 - make a new GitHub repository (repo),
 - create a new R Studio project on your computer that is connected to the GitHub repo,
-- 
+- complete the basic git cycle of status, add, commit, push, and
+- make a GitHub page for your repo.
+
+## Prerequisites
+
+I assume that before doing this tutorial, you have make a GitHub account, installed git on your computer, and connected the two to talk to each other. If not, follow these instructions from Happy Git with R by Jenny Bryan before you continue with the tutorial below:
+
+- [Create a free GitHub account](https://happygitwithr.com/github-acct) if you don't already have one. Note that you can ignore the part about private repos since we will only need to make a public repo for class.
+- [Check if git is installed on your computer](https://happygitwithr.com/install-git#git-already-installed) if you don't already know.
+- If git isn't installed on your computer, [follow the appropriate instructions here for your operating system (Windows, Mac, or Linux)](https://happygitwithr.com/install-git#install-git-windows).
+- [Introduce yourself to git](https://happygitwithr.com/hello-git). You only need to do the instructions that come before Section 7.1. 
+- [Set up a personal access token](https://happygitwithr.com/https-pat). You only need to do the instructions up through (including) Section 9.1.
 
 ## Making a new GitHub repo
 
